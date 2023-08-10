@@ -1,0 +1,22 @@
+{% extends "eventCelebration/base.html" %}
+
+{% block title %}
+    <title>Add Event</title>
+{% endblock %}
+
+{% block content %}
+    <div class="text-center p-2">
+        <h1>Add New Event</h1>
+    </div>
+    {% load bootstrap5 %}
+    <div class="container-sm">
+        {% if errorMsg|length %}
+            <div class="alert alert-danger" role="alert">{{ errorMsg }}</div>
+        {% endif %}
+        <form method="post" action="{% url 'addEvent' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <input type="submit" class="btn btn-primary btn-block mb-4" value="submit">
+        </form>
+    </div>
+{% endblock %}

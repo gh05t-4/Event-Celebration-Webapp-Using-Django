@@ -1,0 +1,28 @@
+.error-msg {
+  color: red;
+}
+
+:root {
+  --bs-body-font-family: "Courier New", Courier, monospace;
+}
+
+.login-container {
+  margin-top: 5rem;
+}
+
+.main-content {
+  margin-top: 2rem;
+}
+
+.navbar-light {
+  background-color: #e3f2fd !important;
+}
+
+.event-imgs {
+  width: 200px;
+  height: auto;
+}
+
+#present-content {
+  color: white !important;
+}

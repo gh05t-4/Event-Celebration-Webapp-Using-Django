@@ -1,0 +1,29 @@
+{% extends "eventCelebration/base.html" %}
+
+{% block title %}
+    <title>Edit Events</title>
+{% endblock %}
+
+{% block navButtons %}
+    <form method="post" action="{% url 'deleteEvent' pk=pk %}">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-danger btn-block me-2" value="Delete" onclick="return confirm('Are you sure you want to delete?')">
+    </form>
+{% endblock %}
+
+{% block content %}
+    <div class="text-center p-2">
+        <h1>Edit Event</h1>
+    </div>
+    {% load bootstrap5 %}
+    <div class="container-sm">
+        {% if errorMsg|length %}
+            <div class="alert alert-danger" role="alert">{{ errorMsg }}</div>
+        {% endif %}
+        <form method="post" action="{% url 'editEvent' pk=pk %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <input type="submit" class="btn btn-primary btn-block mb-4" value="Update">
+        </form>
+    </div>
+{% endblock %}

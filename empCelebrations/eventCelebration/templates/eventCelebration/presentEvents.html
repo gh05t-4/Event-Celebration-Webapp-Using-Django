@@ -1,0 +1,160 @@
+{% extends "eventCelebration/base.html" %}
+
+{% block title %}
+    <title>Presentation of Events</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/confetti.css' %}" />
+{% endblock %}
+
+{% block confetti %}
+    <div class="confetti-land">
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+    </div>
+  
+  
+  
+  
+    <select id="type" class="btn btn-outline-success">
+        <option value="cornfetti" class="dropdown-item">Candy Corn</option>
+        <option value="leaves" class="dropdown-item">Fall Leaves</option>
+        <option value="bookmarks" class="dropdown-item" selected>Bookmarks</option>
+        <option value="snowflake" class="dropdown-item">Snowflakes</option>
+    </select>
+{% endblock %}
+
+{% block nav %}
+{% endblock %}
+
+{% block content %}
+    <div id="present-content" style="color: white; margin-top: 5rem !important;">
+        <div class="text-center p-2">
+            <h1 id="event-name" class="display-3"></h1>
+        </div>
+        {% load bootstrap5 %}
+        <div class="container-fluid text-center">
+            <img id="event-img" class="rounded img-thumbnail img-fluid" style="max-width: 720px;" />
+            <p id="event-desc" class="p-5 display-6"></p>
+            <audio id="event-audio" autoplay loop></audio>
+        </div>
+    </div>
+{% endblock %}
+
+{% block customJs %}
+    <script src="{% static 'js/confetti.js' %}"></script>
+    <script>
+            const events = JSON.parse('{{ events|escapejs }}');
+            const events_length = events.length
+            const event_names = [];
+            const event_types = [];
+            const event_images = [];
+            const event_descriptions = [];
+            let index = 0
+
+            events.forEach(data => {
+                event_names.push(data.eventName);
+                event_types.push(data.eventType);
+                event_images.push(data.eventImg);
+                event_descriptions.push(data.eventDescription);
+            });
+
+            document.getElementById("event-img").src = event_images[0];
+            document.getElementById("event-name").innerText = event_names[0];
+            document.getElementById("event-desc").innerText = event_descriptions[0];
+            if (event_types[0] === "bday") {
+                document.getElementById("event-audio").src = "{% static 'hbd.mp3' %}";
+            } else {
+                document.getElementById("event-audio").src = "{% static 'piano.mp3' %}"
+            }
+            
+            setInterval(function() {
+                index = (index + 1) % events_length;
+                document.getElementById("event-img").src = event_images[index];
+                document.getElementById("event-name").innerText = event_names[index];
+                document.getElementById("event-desc").innerText = event_descriptions[index];  
+                if (event_types[index] === "bday") {
+                    document.getElementById("event-audio").src = "{% static 'hbd.mp3' %}";
+                } else {
+                    document.getElementById("event-audio").src = "{% static 'piano.mp3' %}"
+            }  
+            }, 30000);
+    </script>
+{% endblock %}

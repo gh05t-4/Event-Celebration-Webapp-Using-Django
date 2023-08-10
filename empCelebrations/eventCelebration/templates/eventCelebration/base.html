@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% block title %}
+        <title>BASE</title>
+    {% endblock %}
+
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+  </head>
+  <body>
+        {% block confetti %}
+        {% endblock %}
+        {% block nav %}
+        <nav class="navbar navbar-light bg-light p-2 shadow-sm">
+          {% block navButtons %}
+            <i>&nbsp;</i>
+          {% endblock %}
+          <ul class="nav justify-content-end">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'index' %}">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+          </ul>
+        </nav>
+        {% endblock %}
+        <div class="container main-content">
+          {% block content %}
+              <p>BASE TEMPLATE</p>
+          {% endblock %}
+        </div>
+        {% bootstrap_javascript %}
+        {% block customJs %}
+        {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,52 @@
+{% extends "eventCelebration/base.html" %}
+
+{% block title %}
+    <title>Dashboard</title>
+{% endblock %}
+
+{% block navButtons %}
+<a href="{% url 'addEvent' %}"><button class="btn btn-primary btn-block me-2">Add Event</button></a>
+{% endblock %}
+
+{% block content %}
+    <div class="text-center p-4">
+        <h1>Event Celebration List</h1>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == "success" %}
+                <div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+            {% else %}
+                <div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    
+    <table class="table table-bordered">
+        <tr>
+            <th>#</th>
+            <th>Event Name</th>
+            <th>Event Start Date</th>
+            <th>Event End Date</th>
+            <th>Event Image</th>
+            <th>Event Description</th>
+            <th>Action</th>
+        </tr>
+        {% for row in model %}
+            <tr>
+                <td>{{ row.event_id }}</td>
+                <td>{{ row.event_name }}</td>
+                <td>{{ row.event_start_date }}</td>
+                <td>{{ row.event_end_date }}</td>
+                <!-- Custom date format -->
+                <!-- <td>{{ row.event_end_date|date:"d/m/Y" }}</td> -->
+                <td><img src="{{ row.event_img.url }}" class="img-thumbnail event-imgs" /></td>
+                <td>{{ row.event_description }}</td>
+                {% load static %}
+                <td><a href="{% url 'editEvent' pk=row.pk %}" class="edit-button"><img src="{% static 'edit.png' %}" width="25px" height="25px" alt="Edit Icon" /></a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+{% endblock %}

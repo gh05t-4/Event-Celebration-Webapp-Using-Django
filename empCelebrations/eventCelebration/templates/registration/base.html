@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% block title %}
+        <title>BASE</title>
+    {% endblock %} 
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+  </head>
+  <body class="bg-image" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg'); height: 100vh">
+    <!-- Heading Section -->
+    <div class="text-center p-3 bg-dark text-white shadow-sm">
+      {% block pageHeading %}
+      {% endblock %}
+    </div>
+
+    <!-- Login Form Section -->
+    <div class="login-container d-flex align-items-center justify-content-center">
+      {% block content %}
+          <p>BASE TEMPLATE</p>
+      {% endblock %}
+    </div>
+  </body>
+</html>

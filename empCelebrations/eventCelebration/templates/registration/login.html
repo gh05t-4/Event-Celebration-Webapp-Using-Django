@@ -1,0 +1,65 @@
+{% extends "registration/base.html" %} 
+{% block title %}
+  <title>Login</title>
+{% endblock %}
+
+{% block pageHeading %}
+  <h1>Event Celebration</h1>
+  <h2>Admin Login</h2>
+{% endblock %}
+
+{% block content %}
+
+<!--   {% if form.errors %}
+    <p class="error-msg">Your username and password didn't match. Please try again.</p>
+  {% endif %}
+
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p class="error-msg">Your account doesn't have access to this page. To proceed,
+      please login with an account that has access.</p>
+    {% else %}
+      <p class="error-msg">Please login to see this page.</p>
+    {% endif %}
+  {% endif %}
+ -->
+  <!-- <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <table>
+      <tr>
+        <td>{{ form.username.label_tag }}</td>
+        <td>{{ form.username }}</td>
+      </tr>
+      <tr>
+        <td>{{ form.password.label_tag }}</td>
+        <td>{{ form.password }}</td>
+      </tr>
+    </table>
+    <input type="submit" value="login">
+    <input type="hidden" name="next" value="{{ next }}">
+  </form> -->
+
+  <div class="card p-4 shadow-lg">
+    {% if next %}
+      {% if user.is_authenticated %}
+        <p class="alert alert-danger">Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
+      {% else %}
+        <p class="alert alert-danger">Please login to see this page.</p>
+      {% endif %}
+    {% endif %}
+    {% load bootstrap5 %}
+    
+    <div class="text-center p-3">
+      <a class="mx-auto" href="{% url 'presentEvents' %}"><button type="button" class="btn btn-outline-info">Go To Presentation</button></a>
+    </div>
+
+    <form method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      <input type="submit" class="btn btn-primary btn-block mb-4" value="login">
+      <input type="hidden" name="next" value="{{ next }}">
+    </form>
+  </div>
+
+{% endblock %}
