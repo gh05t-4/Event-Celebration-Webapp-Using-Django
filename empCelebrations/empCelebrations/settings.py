@@ -75,12 +75,14 @@ WSGI_APPLICATION = 'empCelebrations.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# Set up your MySQL Server and change the fields below
+# Use strong password in production. This is just for demonstration.
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'empCelebrations',
-        'USER': 'dev',
-        'PASSWORD': 'toor',
+        'NAME': 'empCelebrations', # Change this
+        'USER': 'dev', # Change this
+        'PASSWORD': 'toor', # Change this
         'HOST': 'localhost',
         'PORT': '3306',
     }
