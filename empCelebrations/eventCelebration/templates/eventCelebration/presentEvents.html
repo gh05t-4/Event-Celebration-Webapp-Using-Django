@@ -1,6 +1,9 @@
 {% extends "eventCelebration/base.html" %}
 
 {% block title %}
+    <!-- Refresh page every 30 minutes -->
+    <meta http-equiv="refresh" content="1800">
+
     <title>Presentation of Events</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/confetti.css' %}" />
