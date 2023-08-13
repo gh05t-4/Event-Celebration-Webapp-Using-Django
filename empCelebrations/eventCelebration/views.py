@@ -19,21 +19,6 @@ def index(request):
         # Display the details of events stored in the database
         # Provide option for CRUD operations.
         model = EventsList.objects.all()
-
-        for row in model:
-            # Check if the event has started and only add it to PresentationEvents model if it
-            # does'nt already exists
-            if row.event_start_date <= date.today() and row.event_end_date >= date.today() and not PresentationEvents.objects.filter(presentations_id=row.event_id).exists():
-                presentation_instance = PresentationEvents()
-
-                presentation_instance.presentations_id = row.event_id
-                presentation_instance.event_name = row.event_name
-                presentation_instance.event_type = row.event_type
-                presentation_instance.event_end_date = row.event_end_date
-                presentation_instance.event_img = row.event_img.url
-                presentation_instance.event_description = row.event_description
-
-                presentation_instance.save()
         
         return render(request, "eventCelebration/index.html", {'model': model})
 
@@ -143,6 +128,24 @@ def presentEvents(request):
         for row in model:
             if row.event_end_date < date.today():
                 row.delete()
+
+        # Add events to PresentationEvents model if the events have started
+        model = EventsList.objects.all()
+
+        for row in model:
+            # Check if the event has started and only add it to PresentationEvents model if it
+            # does'nt already exists
+            if row.event_start_date <= date.today() and row.event_end_date >= date.today() and not PresentationEvents.objects.filter(presentations_id=row.event_id).exists():
+                presentation_instance = PresentationEvents()
+
+                presentation_instance.presentations_id = row.event_id
+                presentation_instance.event_name = row.event_name
+                presentation_instance.event_type = row.event_type
+                presentation_instance.event_end_date = row.event_end_date
+                presentation_instance.event_img = row.event_img.url
+                presentation_instance.event_description = row.event_description
+
+                presentation_instance.save()
 
         # Get the updated data from the eventCelebration_presentationevents
         # if any data is deleted
